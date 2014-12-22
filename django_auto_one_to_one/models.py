@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth.models import User
 
-def AutoOneToOneModel(parent, attr=None, related_name=None):
+def AutoOneToOneModel(parent, related_name=None, attr=None):
     """
     Class factory that returns an abstract model attached to a ``model`` object
     that creates and destroys concrete child instances where required.
