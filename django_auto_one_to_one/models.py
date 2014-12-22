@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
+from django.contrib.auth.models import User
 
 def AutoOneToOneModel(parent, attr=None, related_name=None):
     """
@@ -71,3 +72,6 @@ def AutoOneToOneModel(parent, attr=None, related_name=None):
             return u"%s=%s" % (attr, getattr(self, attr))
 
     return Parent
+
+def PerUserData(related_name=None):
+    return AutoOneToOneModel(User, related_name=related_name)
