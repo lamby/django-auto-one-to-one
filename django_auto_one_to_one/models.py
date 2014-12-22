@@ -30,7 +30,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None):
 
     # Automatically work kkkkk
     if not attr:
-        attr = parent._meta.model_name
+        attr = parent._meta.verbose_name.replace(' ', '_')
 
     class Base(models.base.ModelBase):
         def __new__(mcs, name, bases, attrs):
