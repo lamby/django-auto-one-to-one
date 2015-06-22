@@ -104,6 +104,10 @@ def AutoOneToOneModel(parent, related_name=None, attr=None):
 
             if model._meta.abstract:
                 return model
+            
+            # Avoid virtual models (for, for instance, deferred fields)
+            if model._meta.concrete_model is not model:
+                return model
 
             # Setup the signals that will automatically create and destroy
             # instances.
