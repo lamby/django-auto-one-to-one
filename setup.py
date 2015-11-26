@@ -10,4 +10,8 @@ setup(
     author="Chris Lamb",
     author_email="chris@chris-lamb.co.uk",
     description="Automatically create and destroy child model instances",
+
+    install_requires=(
+        'six',
+    ),
 )
