@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='django-auto-one-to-one',
-    version='2.2.0',
+    version='2.2.1',
     packages=(
         'django_auto_one_to_one',
     ),
