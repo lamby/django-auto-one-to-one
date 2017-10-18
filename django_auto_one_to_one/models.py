@@ -115,8 +115,8 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
             # Setup the signals that will automatically create and destroy
             # instances.
             #
-            # We use weak=False or our receivers will be garbage collected.
-            #
+            # We use weak=False or our (inline) receivers will be garbage
+            # collected.
             def on_create_cb(sender, instance, created, *args, **kwargs):
                 if created:
                     model.objects.create(**{attr: instance})
