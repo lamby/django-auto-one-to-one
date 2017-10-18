@@ -134,15 +134,13 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
             return model
 
     @six.python_2_unicode_compatible
-    class Parent(models.Model):
+    class Parent(six.with_metaclass(Base, models.Model)):
         locals()[attr] = models.OneToOneField(
             parent,
             on_delete=on_delete,
             primary_key=True,
             related_name=related_name,
         )
-
-        __metaclass__ = Base
 
         class Meta:
             abstract = True
