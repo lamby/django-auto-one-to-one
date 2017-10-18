@@ -143,10 +143,10 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
             abstract = True
 
         def __str__(self):
-            return "%s=%s" % (attr, getattr(self, attr))
+            return "{}={}".format(attr, getattr(self, attr))
 
         def __unicode__(self):
-            return u"%s=%s" % (attr, getattr(self, attr))
+            return u"{}={}".format(attr, getattr(self, attr))
 
     return Parent
 
