@@ -90,7 +90,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None):
 
     # Support string or classes for the parent
     if isinstance(parent, six.string_types):
-        parent = apps.get_model(*parent.split('.', 1))
+        parent = apps.get_model(*parent.split('.', 1), require_ready=False)
         if parent is None:
             raise ValueError("Invalid model parent name")
 
