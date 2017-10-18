@@ -133,6 +133,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
             return model
 
+    @six.python_2_unicode_compatible
     class Parent(models.Model):
         locals()[attr] = models.OneToOneField(
             parent,
@@ -148,9 +149,6 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
         def __str__(self):
             return "{}={}".format(attr, getattr(self, attr))
-
-        def __unicode__(self):
-            return u"{}={}".format(attr, getattr(self, attr))
 
     return Parent
 
