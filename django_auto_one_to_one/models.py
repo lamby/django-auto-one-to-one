@@ -142,6 +142,9 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
         class Meta:
             abstract = True
 
+        def __str__(self):
+            return "%s=%s" % (attr, getattr(self, attr))
+
         def __unicode__(self):
             return u"%s=%s" % (attr, getattr(self, attr))
 
