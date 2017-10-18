@@ -5,7 +5,7 @@ from django.apps import apps
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth.models import User
 
-def AutoOneToOneModel(parent, related_name=None, attr=None):
+def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CASCADE):
     """
     Automatically create child model instances when a parent class is created.
 
@@ -117,21 +117,22 @@ def AutoOneToOneModel(parent, related_name=None, attr=None):
             #
             # We use weak=False or our receivers will be garbage collected.
             #
-            def on_create(sender, instance, created, *args, **kwargs):
+            def on_create_cb(sender, instance, created, *args, **kwargs):
                 if created:
                     model.objects.create(**{attr: instance})
 
-            def on_delete(sender, instance, *args, **kwargs):
+            def on_delete_cb(sender, instance, *args, **kwargs):
                 model.objects.filter(pk=instance).delete()
 
-            post_save.connect(on_create, sender=parent, weak=False)
-            pre_delete.connect(on_delete, sender=parent, weak=False)
+            post_save.connect(on_create_cb, sender=parent, weak=False)
+            pre_delete.connect(on_delete_cb, sender=parent, weak=False)
 
             return model
 
     class Parent(models.Model):
         locals()[attr] = models.OneToOneField(
             parent,
+            on_delete=on_delete,
             primary_key=True,
             related_name=related_name,
         )
