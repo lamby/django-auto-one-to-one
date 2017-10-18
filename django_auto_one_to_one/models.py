@@ -1,6 +1,7 @@
 import six
 
 from django.db import models
+from django.apps import apps
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth.models import User
 
@@ -89,7 +90,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None):
 
     # Support string or classes for the parent
     if isinstance(parent, six.string_types):
-        parent = models.get_model(*parent.split('.', 1))
+        parent = apps.get_model(*parent.split('.', 1))
         if parent is None:
             raise ValueError("Invalid model parent name")
 
