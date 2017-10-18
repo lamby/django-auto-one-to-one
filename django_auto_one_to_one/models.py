@@ -157,8 +157,3 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
 def PerUserData(*args, **kwargs):
     return AutoOneToOneModel(get_user_model(), *args, **kwargs)
-
-
-def OneToOneModel(*args, **kwargs):
-    kwargs.setdefault('auto', False)
-    return AutoOneToOneModel(*args, **kwargs)

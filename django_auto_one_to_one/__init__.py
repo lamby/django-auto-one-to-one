@@ -1,1 +1,1 @@
-from .models import OneToOneModel, AutoOneToOneModel, PerUserData
+from .models import AutoOneToOneModel, PerUserData
