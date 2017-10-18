@@ -5,7 +5,8 @@ from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save, pre_delete
 
-def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CASCADE):
+
+def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CASCADE, auto=True):
     """
     Automatically create child model instances when a parent class is created.
 
@@ -112,6 +113,9 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
             if model._meta.concrete_model is not model:
                 return model
 
+            if not auto:
+                return model
+
             # Setup the signals that will automatically create and destroy
             # instances.
             #
@@ -153,3 +157,8 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
 def PerUserData(*args, **kwargs):
     return AutoOneToOneModel(get_user_model(), *args, **kwargs)
+
+
+def OneToOneModel(*args, **kwargs):
+    kwargs.setdefault('auto', False)
+    return AutoOneToOneModel(*args, **kwargs)
