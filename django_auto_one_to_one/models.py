@@ -1,8 +1,8 @@
 import six
 
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save, pre_delete
+from django.contrib.auth.models import User
 
 
 def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CASCADE, auto=True):
@@ -136,4 +136,4 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
 
 def PerUserData(*args, **kwargs):
-    return AutoOneToOneModel(get_user_model(), *args, **kwargs)
+    return AutoOneToOneModel(User, *args, **kwargs)
