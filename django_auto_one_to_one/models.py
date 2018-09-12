@@ -1,7 +1,6 @@
 import six
 
 from django.db import models
-from django.apps import apps
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save, pre_delete
 
@@ -32,15 +31,6 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
     You must ensure that child models can be created without arguments via
     ``default=`` rather than overriding ``save``.
-
-    Strings as model names
-    ======================
-
-    Like ``models.ForeignKey``, ``AutoOneToOneModel`` can take a model name via
-    a string::
-
-        class UserData(AutoOneToOneModel('auth.User')):
-            field_c = models.IntegerField(default=3)
 
     Related names
     =============
@@ -88,12 +78,6 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
         class Profile(PerUserData('profile')):
             nickname = models.CharField(max_length=40)
     """
-
-    # Support string or classes for the parent
-    if isinstance(parent, six.string_types):
-        parent = apps.get_model(*parent.split('.', 1), require_ready=False)
-        if parent is None:
-            raise ValueError("Invalid model parent name")
 
     # Automatically calculate attribute on child class
     if not attr:
