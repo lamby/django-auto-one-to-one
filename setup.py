@@ -1,11 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='django-auto-one-to-one',
     version='3.0.0',
-    packages=(
-        'django_auto_one_to_one',
-    ),
+    packages=find_packages(exclude=('tests',)),
+
     url='https://chris-lamb.co.uk/projects/django-auto-one-to-one',
     author="Chris Lamb",
     author_email="chris@chris-lamb.co.uk",
