@@ -1,0 +1,27 @@
+language: python
+
+python:
+ - "2.7"
+ - "3.5"
+ - "3.6"
+env:
+  matrix:
+   - DJANGO="Django<1.11"
+   - DJANGO="Django<2"
+   - DJANGO="Django<2.1"
+
+matrix:
+  exclude:
+    - python: "2.7"
+      env: DJANGO="Django<2.1"
+    - python: "3.6"
+      env: DJANGO="Django<1.11"
+
+install:
+ - pip install "$DJANGO" flake8
+
+before_script:
+  - flake8 . || true
+
+script:
+  - ./runtests.py
