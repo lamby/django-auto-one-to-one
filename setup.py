@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-auto-one-to-one',
-    version='3.0.0',
+    version='3.1.0',
     packages=find_packages(exclude=('tests',)),
 
     url='https://chris-lamb.co.uk/projects/django-auto-one-to-one',
