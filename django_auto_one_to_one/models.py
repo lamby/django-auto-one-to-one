@@ -81,7 +81,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
     # Automatically calculate attribute on child class
     if not attr:
-        attr = parent._meta.verbose_name.replace(' ', '_')
+        attr = parent._meta.verbose_name_raw.replace(' ', '_')
 
     # The current implementation is a class factory that returns an abstract
     # parent model. It's a little convoluted but I'm not sure everything is
