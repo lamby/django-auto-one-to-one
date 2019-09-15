@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from django_auto_one_to_one import AutoOneToOneModel, PerUserData
 
