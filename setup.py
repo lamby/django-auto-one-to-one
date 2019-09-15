@@ -11,7 +11,7 @@ setup(
     description="Automatically create and destroy child model instances",
 
     install_requires=(
-        'Django>=1.8',
+        'Django>=1.11',
         'six',
     ),
 )
