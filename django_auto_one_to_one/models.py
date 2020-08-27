@@ -3,6 +3,7 @@ import six
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth import get_user_model
+from django.apps import apps
 
 
 def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CASCADE, auto=True):
@@ -98,6 +99,13 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
                 return model
 
             if not auto:
+                return model
+            
+            # Don't set up signals for models that aren't installed as the
+            # database tables won't exist.
+            try:
+                apps.get_app_config(model._meta.app_label)
+            except LookupError:
                 return model
 
             # Setup the signals that will automatically create and destroy
