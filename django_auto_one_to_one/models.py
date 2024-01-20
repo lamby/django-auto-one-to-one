@@ -1,5 +1,3 @@
-import six
-
 from django.db import models
 from django.db.models.signals import post_save, pre_delete
 from django.contrib.auth import get_user_model
@@ -125,8 +123,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
             return model
 
-    @six.python_2_unicode_compatible
-    class Parent(six.with_metaclass(Base, models.Model)):
+    class Parent(Base, metaclass=models.Model):
         locals()[attr] = models.OneToOneField(
             parent,
             on_delete=on_delete,
