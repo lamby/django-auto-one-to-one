@@ -123,7 +123,7 @@ def AutoOneToOneModel(parent, related_name=None, attr=None, on_delete=models.CAS
 
             return model
 
-    class Parent(Base, metaclass=models.Model):
+    class Parent(models.Model, metaclass=Base):
         locals()[attr] = models.OneToOneField(
             parent,
             on_delete=on_delete,
